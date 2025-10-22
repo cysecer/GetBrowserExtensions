@@ -32,7 +32,7 @@ foreach($path in $paths){
                  #
                  #Save Array from CSV and search for Username + Title of Extension
                  $matches = [array](Import-Csv -Path $csv_path | Where-Object {
-                    $_.Username.Trim() -ieq $User.ToString().Trim() -and
+                    $_.Username.Trim() -ieq $env:USERNAME.ToString().Trim() -and
                     $_.Title.Trim() -ieq $Json.action.default_title.ToString().Trim()
                  })
                  #If Exists $exists gets true
@@ -50,7 +50,7 @@ foreach($path in $paths){
         if($exists -ne $true){
             #add to csv
             $Output += New-Object -TypeName PSObject -Property @{
-                Username = $User
+                Username = $env:USERNAME
                 ExtensionPath = $path
                 Title = $Json.action.default_title
             } | Select-Object Username, Title, ExtensionPath
