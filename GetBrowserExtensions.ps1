@@ -145,7 +145,7 @@ $users_path = [System.Environment]::GetFolderPath('UserProfile')
 #Get User Folderes
 $users_path = Split-Path $users_path -Parent
 #Only take numeric ones
-$Users = Get-ChildItem -Path $users_path -Name | Where-Object { $_ -match '^\d+$' }
+$Users = Get-ChildItem -Path $users_path -Name # If only numeric usernames are relevant add: | Where-Object { $_ -match '^\d+$' }
 
 
 #prepare csv output object
@@ -281,3 +281,4 @@ foreach($User in $Users){
 }
 #export csv
 $Output | Export-CSV $CSVPath -Append -NoTypeInformation 
+
